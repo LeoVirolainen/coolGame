@@ -1,9 +1,9 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Audio;
 
-public class gunScript : MonoBehaviour
-{
+public class gunScript : MonoBehaviour {
 
+    public AudioSource fire;
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
@@ -15,8 +15,11 @@ public class gunScript : MonoBehaviour
 
     private float nextTimeToFire = 0f; //for full-auto
 
-    void Update()
-    {
+    private void Awake() {
+        fire = GetComponent<AudioSource>();
+    }
+
+    void Update() {
         if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire) //poista "getButtonDown":ista "Down" -nii ampuu full-auto
         {
             nextTimeToFire = Time.time + 1f / fireRate;
@@ -25,23 +28,20 @@ public class gunScript : MonoBehaviour
 
     }
 
-    void Shoot()
-    {
+    void Shoot() {
+        fire.Play();
         muzzleFlash.Play();
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) {
             Debug.Log(hit.transform.name);
 
             Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
-            {
+            if (target != null) {
                 target.TakeDamage(damage);
             }
 
-            if (hit.rigidbody != null)
-            {
+            if (hit.rigidbody != null) {
                 hit.rigidbody.AddForce(-hit.normal * impactForce); //täräyttää targetia
             }
 
