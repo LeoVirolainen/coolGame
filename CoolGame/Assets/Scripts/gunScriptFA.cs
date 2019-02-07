@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class gunScriptFA : MonoBehaviour
 {
-
+    public AudioSource fire;
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
@@ -14,6 +14,10 @@ public class gunScriptFA : MonoBehaviour
     public GameObject impactEffect; //osuman part. effect
 
     private float nextTimeToFire = 0f; //for full-auto
+
+    private void Awake() {
+        fire = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -27,6 +31,7 @@ public class gunScriptFA : MonoBehaviour
 
     void Shoot()
     {
+        fire.Play();
         muzzleFlash.Play();
 
         RaycastHit hit;
