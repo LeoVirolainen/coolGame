@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class characterController : MonoBehaviour
 {
+    public float smoothTilt = 5.0f;
+    public float tiltAngle = 5.0f;
     public float speed = 5.0F;
     public float jumpSpeed = 5f;
     public Rigidbody rb; //for za jumping
