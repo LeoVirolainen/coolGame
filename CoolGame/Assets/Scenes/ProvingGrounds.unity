@@ -14354,7 +14354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436047659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.245, y: -0.436, z: 0.09}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 227200718}
@@ -19060,7 +19060,7 @@ Transform:
   - {fileID: 30952114}
   - {fileID: 1527622278}
   m_Father: {fileID: 1404448102}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &503575121
 ParticleSystemRenderer:
@@ -23837,6 +23837,7 @@ GameObject:
   - component: {fileID: 576085301}
   - component: {fileID: 576085302}
   - component: {fileID: 576085303}
+  - component: {fileID: 576085304}
   m_Layer: 0
   m_Name: GunPistol
   m_TagString: Untagged
@@ -23851,7 +23852,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 576085300}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 41.118217, y: -17.171404, z: -10.789298}
   m_LocalScale: {x: 4.5454545, y: 4.5454545, z: 1}
   m_Children:
@@ -23877,10 +23878,13 @@ MonoBehaviour:
   range: 100
   fireRate: 5
   impactForce: 100
+  maxAmmo: 8
+  reloadTime: 1
   fpsCam: {fileID: 534669904}
   muzzleFlash: {fileID: 1143263369}
   impactEffect: {fileID: 9181287707656273797, guid: 23879fdf4aa989d4d82d3f15b14aa92b,
     type: 3}
+  animator: {fileID: 576085304}
 --- !u!82 &576085303
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23977,6 +23981,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &576085304
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576085300}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0180c3028d5e674ca9aa4640c6980d5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &627263562
 GameObject:
   m_ObjectHideFlags: 0
@@ -24290,7 +24313,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924448643}
   m_LocalRotation: {x: 0.7008997, y: -0, z: -0, w: 0.7132599}
-  m_LocalPosition: {x: 0.196, y: -0.602, z: -1.119}
+  m_LocalPosition: {x: 0.251, y: -0.479, z: -0.572}
   m_LocalScale: {x: 0.15, y: 0.5, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1681574159}
@@ -24382,7 +24405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 1fe835c5acc9f5645854fc0fc2574a9d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 1fe835c5acc9f5645854fc0fc2574a9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -34175,6 +34198,7 @@ GameObject:
   - component: {fileID: 1404448102}
   - component: {fileID: 1404448103}
   - component: {fileID: 1404448104}
+  - component: {fileID: 1404448105}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -34193,8 +34217,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4.5454545, y: 4.5454545, z: 1}
   m_Children:
-  - {fileID: 503575120}
   - {fileID: 393245318}
+  - {fileID: 503575120}
   m_Father: {fileID: 96728434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34213,12 +34237,15 @@ MonoBehaviour:
   fire: {fileID: 1404448104}
   damage: 10
   range: 100
-  fireRate: 15
-  impactForce: 100
+  fireRate: 2
+  impactForce: 150
+  maxAmmo: 5
+  reloadTime: 2
   fpsCam: {fileID: 534669904}
   muzzleFlash: {fileID: 503575122}
   impactEffect: {fileID: 9181287707656273797, guid: 23879fdf4aa989d4d82d3f15b14aa92b,
     type: 3}
+  animator: {fileID: 1404448105}
 --- !u!82 &1404448104
 AudioSource:
   m_ObjectHideFlags: 0
@@ -34315,6 +34342,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1404448105
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404448101}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c6c1e8ab8ff946d428c88567d1bf7de1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1527622277
 GameObject:
   m_ObjectHideFlags: 0
@@ -39101,6 +39147,7 @@ GameObject:
   - component: {fileID: 1681574159}
   - component: {fileID: 1681574160}
   - component: {fileID: 1681574161}
+  - component: {fileID: 1681574162}
   m_Layer: 0
   m_Name: GunFullAuto
   m_TagString: Untagged
@@ -39139,12 +39186,15 @@ MonoBehaviour:
   fire: {fileID: 1681574161}
   damage: 10
   range: 100
-  fireRate: 10
+  fireRate: 15
   impactForce: 30
+  maxAmmo: 25
+  reloadTime: 3
   fpsCam: {fileID: 534669904}
   muzzleFlash: {fileID: 436047662}
   impactEffect: {fileID: 9181287707656273797, guid: 23879fdf4aa989d4d82d3f15b14aa92b,
     type: 3}
+  animator: {fileID: 1681574162}
 --- !u!82 &1681574161
 AudioSource:
   m_ObjectHideFlags: 0
@@ -39241,6 +39291,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1681574162
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681574158}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19d480263ece284459b88e5ca853c721, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1930889638
 GameObject:
   m_ObjectHideFlags: 0

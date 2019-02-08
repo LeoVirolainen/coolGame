@@ -1,13 +1,20 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Audio;
+using System.Collections;
 
 public class gunScriptFA : MonoBehaviour
 {
+
     public AudioSource fire;
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
     public float impactForce = 30f;
+
+    public int maxAmmo = 10;
+    private int currentAmmo;
+    public float reloadTime = 1f;
+    private bool isReloading = false;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash; //pyssyn muzzle flash
@@ -15,12 +22,36 @@ public class gunScriptFA : MonoBehaviour
 
     private float nextTimeToFire = 0f; //for full-auto
 
-    private void Awake() {
+    public Animator animator;
+
+    private void Start()
+    {
+        currentAmmo = maxAmmo;
+    }
+
+    private void OnEnable() //kutsutaan aina ku objekti enablataan
+    {
+        isReloading = false;                        //Jotta aseiden vaihtelu kesken reloadin
+        animator.SetBool("Reloading", false);       //ei sotke kaikkea.
+    }
+
+    private void Awake()
+    {
         fire = GetComponent<AudioSource>();
     }
 
     void Update()
     {
+
+        if (isReloading)
+            return;
+
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire) //poista "getButtonDown":ista "Down" -nii ampuu full-auto
         {
             nextTimeToFire = Time.time + 1f / fireRate;
@@ -29,10 +60,27 @@ public class gunScriptFA : MonoBehaviour
 
     }
 
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        Debug.Log("Reloading...");
+
+        animator.SetBool("Reloading", true);
+
+        yield return new WaitForSeconds(reloadTime - .25f); //*
+        animator.SetBool("Reloading", false);
+        yield return new WaitForSeconds(.25f);  // *ettei voi ampua heti latauksen jälkeen, ku pysy vielä nousee.
+
+        currentAmmo = maxAmmo;
+        isReloading = false;
+    }
+
     void Shoot()
     {
         fire.Play();
         muzzleFlash.Play();
+
+        currentAmmo--;
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
