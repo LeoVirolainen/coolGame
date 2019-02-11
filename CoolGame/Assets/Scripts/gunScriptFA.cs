@@ -46,13 +46,13 @@ public class gunScriptFA : MonoBehaviour
         if (isReloading)
             return;
 
-        if (currentAmmo <= 0)
+        if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(Reload());
             return;
         }
 
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire) //poista "getButtonDown":ista "Down" -nii ampuu full-auto
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire && currentAmmo > 0) //poista "getButtonDown":ista "Down" -nii ampuu full-auto
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
