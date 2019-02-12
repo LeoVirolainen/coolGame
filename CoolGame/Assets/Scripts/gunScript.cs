@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
+using UnityEngine.UI;
 
 public class gunScript : MonoBehaviour {
 
@@ -23,15 +24,19 @@ public class gunScript : MonoBehaviour {
 
     public Animator animator;
 
+    public Text ammoCount;
+
     private void Start()
     {
         currentAmmo = maxAmmo;
+        SetAmmoCount();
     }
 
     private void OnEnable() //kutsutaan aina ku objekti enablataan
     {
         isReloading = false;                        //Jotta aseiden vaihtelu kesken reloadin
         animator.SetBool("Reloading", false);       //ei sotke kaikkea.
+        SetAmmoCount();
     }
 
     private void Awake() {
@@ -70,6 +75,7 @@ public class gunScript : MonoBehaviour {
 
         currentAmmo = maxAmmo;
         isReloading = false;
+        SetAmmoCount();
     }
 
     void Shoot() {
@@ -77,6 +83,7 @@ public class gunScript : MonoBehaviour {
         muzzleFlash.Play();
 
         currentAmmo--;
+        SetAmmoCount();
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) {
@@ -94,5 +101,10 @@ public class gunScript : MonoBehaviour {
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); //liittyy impactin particleseihin
             Destroy(impactGO, 2f); //tuhoo "impact" -assetit 2 sek. päästä
         }
+    }
+
+    void SetAmmoCount() //ammukset UI:ssa
+    {
+        ammoCount.text = currentAmmo.ToString() + "/" + maxAmmo;
     }
 }
