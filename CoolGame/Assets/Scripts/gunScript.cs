@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class gunScript : MonoBehaviour {
 
-    public AudioSource fire;
+    public AudioClip fire;
+    public AudioClip reload;
+    public AudioSource gun;
     public float damage = 10f;
     public float range = 100f;
     public float fireRate = 15f;
@@ -40,7 +42,8 @@ public class gunScript : MonoBehaviour {
     }
 
     private void Awake() {
-        fire = GetComponent<AudioSource>();
+        gun = GetComponent<AudioSource>();
+        //reload = GetComponent<AudioSource>();
     }
 
     void Update() {
@@ -64,6 +67,8 @@ public class gunScript : MonoBehaviour {
 
     IEnumerator Reload()
     {
+        gun.PlayOneShot(reload);
+
         isReloading = true;
         Debug.Log("Reloading...");
 
@@ -79,7 +84,7 @@ public class gunScript : MonoBehaviour {
     }
 
     void Shoot() {
-        fire.Play();
+        gun.PlayOneShot(fire);
         muzzleFlash.Play();
 
         currentAmmo--;
