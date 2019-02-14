@@ -16,7 +16,7 @@ public class gunScript : MonoBehaviour {
     public int maxAmmo = 10;
     private int currentAmmo;
     public float reloadTime = 1f;
-    private bool isReloading = false;
+    public bool isReloading = false;
 
     public Camera fpsCam;
     public ParticleSystem muzzleFlash; //pyssyn muzzle flash
@@ -51,7 +51,7 @@ public class gunScript : MonoBehaviour {
         if (isReloading)
             return;
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo) //ei voi ladata täydellä lippaalla
         {
             StartCoroutine(Reload());
             return;

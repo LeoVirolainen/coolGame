@@ -3,20 +3,21 @@
 public class WeaponSwitching : MonoBehaviour
 {
     public int selectedWeapon = 0;
-
+    //   GameObject Gun;
+    
     void Start()
     {
         SelectWeapon();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+    //    bool ir = Gun.GetComponent<gunScript>().isReloading = false;
 
         int previousSelectedWeapon = selectedWeapon;
 
-       if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             if (selectedWeapon >= transform.childCount - 1)
                 selectedWeapon = 0;
@@ -52,7 +53,7 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
-    void SelectWeapon ()
+    void SelectWeapon()
     {
         int i = 0;
         foreach (Transform weapon in transform)

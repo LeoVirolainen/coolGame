@@ -51,7 +51,7 @@ public class gunScriptFA : MonoBehaviour
         if (isReloading)
             return;
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo) //ei voi ladata täydellä lippaalla
         {
             StartCoroutine(Reload());
             return;

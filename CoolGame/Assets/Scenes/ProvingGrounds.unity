@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -24259,6 +24259,7 @@ MonoBehaviour:
   impactForce: 100
   maxAmmo: 8
   reloadTime: 1
+  isReloading: 0
   fpsCam: {fileID: 534669904}
   muzzleFlash: {fileID: 1143263369}
   impactEffect: {fileID: 9181287707656273797, guid: 23879fdf4aa989d4d82d3f15b14aa92b,
@@ -34536,7 +34537,7 @@ GameObject:
   - component: {fileID: 1404448105}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34577,6 +34578,7 @@ MonoBehaviour:
   impactForce: 150
   maxAmmo: 5
   reloadTime: 2
+  isReloading: 0
   fpsCam: {fileID: 534669904}
   muzzleFlash: {fileID: 503575122}
   impactEffect: {fileID: 9181287707656273797, guid: 23879fdf4aa989d4d82d3f15b14aa92b,
