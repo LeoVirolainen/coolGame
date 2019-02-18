@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beca99626874b9944935b392e72ebe1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyedVer: {fileID: 3865217893703616048, guid: 0cb7f4d94bf192143813d905ccd96a6d,
+    type: 3}
   health: 50
 --- !u!1 &2312626495563186507
 GameObject:
@@ -180,7 +182,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4402880466553034e846ec0066d8001c, type: 3}
+  - {fileID: 2100000, guid: a091380090811a94a941344483f663bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
