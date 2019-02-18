@@ -13,7 +13,9 @@ public class Target : MonoBehaviour {
     }
 
     void Die() {
-        Instantiate(destroyedVer, transform.position, transform.rotation);
+        if (destroyedVer != null) {
+            Instantiate(destroyedVer, transform.position, transform.rotation);
+        }
         Destroy(gameObject);
     }
 }
