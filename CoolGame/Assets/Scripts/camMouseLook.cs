@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camMouseLook : MonoBehaviour
-{
+public class camMouseLook : MonoBehaviour {
     Vector2 mouseLook;
     Vector2 smoothV;
     public float sensitivity = 2.0f;
@@ -11,13 +10,11 @@ public class camMouseLook : MonoBehaviour
 
     GameObject character;
 
-    void Start()
-    {
+    void Start() {
         character = this.transform.parent.gameObject;
     }
 
-    void Update()
-    {
+    void Update() {
         var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
         md = Vector2.Scale(md, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
