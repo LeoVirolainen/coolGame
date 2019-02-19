@@ -15,7 +15,7 @@ public class characterController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKey(KeyCode.Space)) {
                 //if (rb.transform.position.y >= 1 && rb.transform.position.y <= 2)
                 rb.AddForce(Vector3.up * jumpSpeed);
         }
