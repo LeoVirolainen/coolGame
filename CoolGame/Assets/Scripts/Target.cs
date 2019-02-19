@@ -2,8 +2,14 @@
 using UnityEngine;
 
 public class Target : MonoBehaviour {
+    public GameObject okVer;
     public GameObject destroyedVer;
+    BoxCollider bc;
     public float health = 50f;
+
+    private void Start() {
+        bc = GetComponent<BoxCollider>();
+    }
 
     public void TakeDamage(float amount) {
         health -= amount;
@@ -14,9 +20,12 @@ public class Target : MonoBehaviour {
 
     void Die() {
         if (destroyedVer != null) {
-            Instantiate(destroyedVer, transform.position, transform.rotation);
+            destroyedVer.gameObject.SetActive(true);
+            okVer.gameObject.SetActive(false);
+            bc.enabled = false;
+            //Instantiate(destroyedVer, transform.position, transform.rotation);
         }
-        Destroy(gameObject);
+        Destroy(gameObject, 8);
     }
 }
 
