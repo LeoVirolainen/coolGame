@@ -23,9 +23,11 @@ public class Target : MonoBehaviour {
             destroyedVer.gameObject.SetActive(true);
             okVer.gameObject.SetActive(false);
             bc.enabled = false;
+            Destroy(gameObject, 8);
             //Instantiate(destroyedVer, transform.position, transform.rotation);
+        } else {
+            Destroy(gameObject);
         }
-        Destroy(gameObject, 8);
     }
 }
 
