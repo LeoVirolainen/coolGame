@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 1722507207}
   - component: {fileID: 1722507208}
   - component: {fileID: 1722507209}
+  - component: {fileID: 130918974302275560}
   m_Layer: 0
   m_Name: FPScorridor1
   m_TagString: Untagged
@@ -672,3 +673,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.8934379, y: 6, z: 0.10773761}
   m_Center: {x: 0, y: 0.00000034059798, z: -0.04613076}
+--- !u!65 &130918974302275560
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1722507203}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.8934379, y: 6, z: 0.5307181}
+  m_Center: {x: 0, y: 0.00000034059798, z: 4.0245123}
