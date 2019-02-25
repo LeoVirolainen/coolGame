@@ -652,9 +652,10 @@ GameObject:
   - component: {fileID: 5240708184422517819}
   - component: {fileID: 5164852762009137243}
   - component: {fileID: 5288823182285849189}
+  - component: {fileID: 8347662998188785445}
   m_Layer: 0
   m_Name: KlausDroid2-0
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -668,7 +669,7 @@ Transform:
   m_GameObject: {fileID: 8347662998188785441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.16, y: 0, z: 5.13}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalScale: {x: 0.030000003, y: 0.03, z: 0.030000003}
   m_Children:
   - {fileID: 6992461639705624243}
   - {fileID: 4583486969364836813}
@@ -736,6 +737,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 51.93236, y: 40.57738, z: 65.01877}
   m_Center: {x: -0.16026796, y: 58.843258, z: -7.773066}
+--- !u!114 &8347662998188785445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8347662998188785441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beca99626874b9944935b392e72ebe1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  okVer: {fileID: 0}
+  destroyedVer: {fileID: 0}
+  health: 150
 --- !u!1 &8388877725642175699
 GameObject:
   m_ObjectHideFlags: 0

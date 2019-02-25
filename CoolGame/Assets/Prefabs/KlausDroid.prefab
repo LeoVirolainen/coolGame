@@ -366,9 +366,10 @@ GameObject:
   - component: {fileID: 1013132159}
   - component: {fileID: 1013132162}
   - component: {fileID: 1013132161}
+  - component: {fileID: 33903997}
   m_Layer: 0
   m_Name: KlausDroid
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -437,6 +438,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0147622, y: 2.4209204, z: 2.0985968}
   m_Center: {x: -0.019432424, y: 1.1924729, z: 0.017881392}
+--- !u!114 &33903997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013132158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beca99626874b9944935b392e72ebe1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  okVer: {fileID: 0}
+  destroyedVer: {fileID: 0}
+  health: 150
 --- !u!1 &1202663844
 GameObject:
   m_ObjectHideFlags: 0

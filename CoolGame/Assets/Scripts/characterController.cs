@@ -6,8 +6,10 @@ public class characterController : MonoBehaviour {
     public float smoothTilt = 5.0f;
     public float tiltAngle = 5.0f;
     public float speed = 5.0F;
-    public float jumpSpeed = 5f;
+    public float jumpSpeed = 500f;
+    public float health = 500f;
     public Rigidbody rb; //for za jumping
+    private bool isJumping = false;
 
     void Start() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -15,13 +17,19 @@ public class characterController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (Input.GetKey(KeyCode.Space)) {
+        if (rb.velocity.y == 0) {
+            if (isJumping == true) {
                 //if (rb.transform.position.y >= 1 && rb.transform.position.y <= 2)
-                rb.AddForce(Vector3.up * jumpSpeed);
+                rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            }
         }
+        isJumping = false;
     }
 
     void Update() {
+        if (Input.GetKeyDown(KeyCode.Space) && (isJumping == false)) {
+            isJumping = true;
+        }
         float translation = Input.GetAxis("Vertical") * speed;
         float strafe = Input.GetAxis("Horizontal") * speed;
         translation *= Time.deltaTime;
