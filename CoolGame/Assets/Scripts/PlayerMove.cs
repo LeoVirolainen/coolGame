@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour {
 
     private CharacterController charController;
 
-    public Animation anim;
+    public Animator anim;
 
     public AnimationCurve jumpFalloff;
     public float jumpMultiplier;
@@ -18,9 +18,9 @@ public class PlayerMove : MonoBehaviour {
 
     private bool isJumping;
 
-    private void Start() {
-        anim = gameObject.GetComponentInChildren<Animation>();
-    }
+   // private void Start() {
+        //anim = GetComponent<Animator>();
+   // }
 
     private void Awake() {
         charController = GetComponent<CharacterController>();
@@ -30,21 +30,18 @@ public class PlayerMove : MonoBehaviour {
         PlayerMovement();
         if (gameObject.GetComponent<CharacterController>().velocity.z > 0) {
             isMoving = true;
-        } else {
+        } if (gameObject.GetComponent<CharacterController>().velocity.z == 0) {
             isMoving = false;
-            print("not moving");
         }
 
         if (gameObject.GetComponent<CharacterController>().velocity.x > 0) {
             isMoving = true;
-        } else {
+        } if (gameObject.GetComponent<CharacterController>().velocity.x == 0) {
             isMoving = false;
-            print("not moving in x");
         }
 
         if (isMoving == true) {
-            //anim.Play("Bobbing");
-            print("I'm moving. Should bob.");
+            anim.Play("Bobbing");
         }
     }
 

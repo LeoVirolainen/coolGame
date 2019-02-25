@@ -36256,7 +36256,7 @@ MonoBehaviour:
   horizontalInputName: Horizontal
   verticalInputName: Vertical
   movementSpeed: 8
-  anim: {fileID: 0}
+  anim: {fileID: 2036144175}
   jumpFalloff:
     serializedVersion: 2
     m_Curve:
