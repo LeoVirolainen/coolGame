@@ -28,8 +28,7 @@ public class gunScript : MonoBehaviour {
 
     public Text ammoCount;
 
-    private void Start()
-    {
+    private void Start() {
         currentAmmo = maxAmmo;
         SetAmmoCount();
     }
@@ -65,8 +64,7 @@ public class gunScript : MonoBehaviour {
 
     }
 
-    IEnumerator Reload()
-    {
+    IEnumerator Reload() {
         gun.PlayOneShot(reload);
 
         isReloading = true;
