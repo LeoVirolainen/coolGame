@@ -7,6 +7,9 @@ public class PlayerMove : MonoBehaviour {
     public string verticalInputName;
     public float movementSpeed;
 
+    public float slopeForce;
+    public float sfRayLength;
+
     private CharacterController charController;
 
     public Animator anim;
@@ -14,13 +17,9 @@ public class PlayerMove : MonoBehaviour {
     public AnimationCurve jumpFalloff;
     public float jumpMultiplier;
     public KeyCode jumpKey;
-    private bool isMoving;
 
     private bool isJumping;
 
-   // private void Start() {
-        //anim = GetComponent<Animator>();
-   // }
 
     private void Awake() {
         charController = GetComponent<CharacterController>();
@@ -28,34 +27,41 @@ public class PlayerMove : MonoBehaviour {
 
     private void Update() {
         PlayerMovement();
-        if (gameObject.GetComponent<CharacterController>().velocity.z > 0) {
-            isMoving = true;
-        } if (gameObject.GetComponent<CharacterController>().velocity.z == 0) {
-            isMoving = false;
-        }
-
-        if (gameObject.GetComponent<CharacterController>().velocity.x > 0) {
-            isMoving = true;
-        } if (gameObject.GetComponent<CharacterController>().velocity.x == 0) {
-            isMoving = false;
-        }
-
-        if (isMoving == true) {
-            anim.Play("Bobbing");
-        }
     }
 
     private void PlayerMovement() {
 
-        float horizInput = Input.GetAxis(horizontalInputName) * movementSpeed;
-        float vertInput = Input.GetAxis(verticalInputName) * movementSpeed;
+        float horizInput = Input.GetAxis(horizontalInputName);
+        float vertInput = Input.GetAxis(verticalInputName);
 
         Vector3 forwardMovement = transform.forward * vertInput;
         Vector3 rightMovement = transform.right * horizInput;
 
-        charController.SimpleMove(forwardMovement + rightMovement);
+        charController.SimpleMove(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed);
+
+        if ((vertInput != 0 || horizInput != 0)) {
+            anim.Play("Bobbing");
+        }
+
+        if ((vertInput != 0 || horizInput != 0) && OnSlope()) {  //if moving AND on slope
+            charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
+        }
 
         JumpInput();
+    }
+
+    private bool OnSlope() {
+        if (isJumping) {
+            return false;
+        }
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, charController.height / 2 * sfRayLength)) {
+            if (hit.normal != Vector3.up) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void JumpInput() {
@@ -74,6 +80,8 @@ public class PlayerMove : MonoBehaviour {
             charController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
             timeInAir += Time.deltaTime;
             yield return null;
+            anim.Play("Jumping");
+
         } while (!charController.isGrounded && charController.collisionFlags != CollisionFlags.Above);
 
         charController.slopeLimit = 45.0f;
