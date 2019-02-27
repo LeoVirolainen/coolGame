@@ -1,7 +1,6 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Target : MonoBehaviour {
+public class Target : MonoBehaviour, IDamageable {
     public GameObject okVer;
     public GameObject destroyedVer;
     BoxCollider bc;
