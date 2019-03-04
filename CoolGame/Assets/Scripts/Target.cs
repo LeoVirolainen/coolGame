@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class Target : MonoBehaviour, IDamageable {
     public GameObject okVer;
     public GameObject destroyedVer;
+    public AudioSource target;
+    public AudioClip col;
     BoxCollider bc;
     public float health = 50f;
+
+    private void OnCollisionEnter(Collision collision) {
+        target.PlayOneShot(col);
+    }
+    private void OnTriggerEnter(Collider other) {
+        if (other.name == ("Body")) {
+            target.PlayOneShot(col);
+        }
+    }
 
     private void Start() {
         bc = GetComponent<BoxCollider>();
