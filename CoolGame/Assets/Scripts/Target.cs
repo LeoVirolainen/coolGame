@@ -10,7 +10,12 @@ public class Target : MonoBehaviour, IDamageable {
     public float health = 50f;
 
     private void OnCollisionEnter(Collision collision) {
-        target.PlayOneShot(col);
+        if (collision.collider.name == ("Box")) {
+            target.PlayOneShot(col);
+        }
+        if (collision.collider.name == ("Floor")) {
+            target.PlayOneShot(col);
+        }
     }
     private void OnTriggerEnter(Collider other) {
         if (other.name == ("Body")) {
