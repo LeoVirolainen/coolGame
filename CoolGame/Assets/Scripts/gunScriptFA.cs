@@ -3,8 +3,7 @@ using UnityEngine.Audio;
 using System.Collections;
 using UnityEngine.UI;
 
-public class gunScriptFA : MonoBehaviour
-{
+public class gunScriptFA : MonoBehaviour {
 
     public AudioSource fire;
     public float damage = 10f;
@@ -27,8 +26,7 @@ public class gunScriptFA : MonoBehaviour
 
     public Text ammoCount;
 
-    private void Start()
-    {
+    private void Start() {
         currentAmmo = maxAmmo;
         SetAmmoCount();
     }
@@ -40,13 +38,11 @@ public class gunScriptFA : MonoBehaviour
         SetAmmoCount();
     }
 
-    private void Awake()
-    {
+    private void Awake() {
         fire = GetComponent<AudioSource>();
     }
 
-    void Update()
-    {
+    void Update() {
 
         if (isReloading)
             return;
@@ -65,8 +61,7 @@ public class gunScriptFA : MonoBehaviour
 
     }
 
-    IEnumerator Reload()
-    {
+    IEnumerator Reload() {
         isReloading = true;
         Debug.Log("Reloading...");
 
@@ -81,8 +76,7 @@ public class gunScriptFA : MonoBehaviour
         SetAmmoCount();
     }
 
-    void Shoot()
-    {
+    void Shoot() {
         fire.Play();
         muzzleFlash.Play();
 
@@ -90,27 +84,27 @@ public class gunScriptFA : MonoBehaviour
         SetAmmoCount();
 
         RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
-        {
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range)) {
             Debug.Log(hit.transform.name);
+            if (!hit.collider.isTrigger) {
 
-            Target target = hit.transform.GetComponent<Target>();
-            if (target != null)
-            {
-                target.TakeDamage(damage);
+                Target target = hit.transform.GetComponent<Target>();
+                if (target != null) {
+                    target.TakeDamage(damage);
+                }
+
+                if (hit.rigidbody != null) {
+                    hit.rigidbody.AddForce(-hit.normal * impactForce); //täräyttää targetia
+                }
+
+                GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); //liittyy impactin particleseihin
+                Destroy(impactGO, 2f); //tuhoo "impact" -assetit 2 sek. päästä
             }
 
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * impactForce); //täräyttää targetia
-            }
 
-            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal)); //liittyy impactin particleseihin
-            Destroy(impactGO, 2f); //tuhoo "impact" -assetit 2 sek. päästä
         }
     }
-    void SetAmmoCount() //ammukset UI:ssa
-    {
+    void SetAmmoCount() {//ammukset UI:ssa
         ammoCount.text = currentAmmo.ToString() + "/" + maxAmmo;
     }
 }

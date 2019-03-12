@@ -93,11 +93,12 @@ public class gunScript : MonoBehaviour {
             Debug.Log(hit.transform.name);
 
             Target target = hit.transform.GetComponent<Target>();
-            if (target != null && target.gameObject.GetComponent<SphereCollider>() == null) { //jos osutussa on target(script) ja ei spherecollideria
-                target.TakeDamage(damage);
+            if (target != null) { //jos osutussa on target(script)
+               // if (!hit.collider.isTrigger) 
+                //target.TakeDamage(damage);
             }
 
-            if (hit.rigidbody != null && target.gameObject.GetComponent<SphereCollider>() == null) {
+            if (hit.rigidbody != null) {
                 hit.rigidbody.AddForce(-hit.normal * impactForce); //täräyttää targetia
             }
 
