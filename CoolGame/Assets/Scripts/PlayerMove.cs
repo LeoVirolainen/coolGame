@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour {
     public float sfRayLength;
 
     private CharacterController charController;
+    private Camera camera;
 
     public Animator anim;
 
@@ -23,6 +24,7 @@ public class PlayerMove : MonoBehaviour {
 
     private void Awake() {
         charController = GetComponent<CharacterController>();
+        camera = GetComponentInChildren<Camera>();
     }
 
     private void Update() {
@@ -48,6 +50,7 @@ public class PlayerMove : MonoBehaviour {
         }
 
         JumpInput();
+        SprintInput();
     }
 
     private bool OnSlope() {
@@ -71,21 +74,32 @@ public class PlayerMove : MonoBehaviour {
         }
     }
 
-    private IEnumerator JumpEvent() {
-        charController.slopeLimit = 90.0f; //tämä estää glitchauksen seinää vasten hypätessä
-        float timeInAir = 0.0f;
-
-        do {
-            float jumpForce = jumpFalloff.Evaluate(timeInAir);
-            charController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
-            timeInAir += Time.deltaTime;
-            yield return null;
-            anim.Play("Jumping");
-
-        } while (!charController.isGrounded && charController.collisionFlags != CollisionFlags.Above);
-
-        charController.slopeLimit = 45.0f;
-        isJumping = false;
+    private void SprintInput() {
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            movementSpeed += 6;
+            camera.fieldOfView += 8;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift)) {
+            movementSpeed -= 6;
+            camera.fieldOfView -= 8;
+        }
     }
+
+    private IEnumerator JumpEvent() {
+    charController.slopeLimit = 90.0f; //tämä estää glitchauksen seinää vasten hypätessä
+    float timeInAir = 0.0f;
+
+    do {
+        float jumpForce = jumpFalloff.Evaluate(timeInAir);
+        charController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+        timeInAir += Time.deltaTime;
+        yield return null;
+        anim.Play("Jumping");
+
+    } while (!charController.isGrounded && charController.collisionFlags != CollisionFlags.Above);
+
+    charController.slopeLimit = 45.0f;
+    isJumping = false;
+}
 }
 
